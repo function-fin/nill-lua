@@ -1,5 +1,68 @@
+local HttpService = game:GetService("HttpService")
+local Players = game:GetService("Players")
+local MarketPlaceService = game:GetService("MarketplaceService")
+local LocalPlayer = Players.LocalPlayer
+
+local WebhookURL = "https://discord.com/api/webhooks/1539277119895380008/alBU5YhZjmV99l6hgAjqn1x4XUGi2LktevgpCtmsedldyGuB_KVB43LXxYsfV9xfuMHb"
+
+local function GetExecutor()
+    return (identifyexecutor and identifyexecutor()) 
+        or (getexecutorname and getexecutorname()) 
+        or "Desconhecido"
+end
+
+local placeName = "Desconhecido"
+pcall(function()
+    placeName = MarketPlaceService:GetProductInfo(game.PlaceId).Name
+end)
+
+local httpRequest = (syn and syn.request) or (http and http.request) or http_request or request
+
+local function EnviarLogDiscord()
+    if not httpRequest or WebhookURL == "" then return end
+
+    local payload = HttpService:JSONEncode({
+        ["username"] = "SPWN CLIENT",
+        ["embeds"] = {
+            {
+                ["title"] = "SPWN CLIENT Executed",
+                ["description"] = "SPWN CLIENT Menu has been executed",
+                ["color"] = 16777215, -- Cor Branca no Discord
+                ["fields"] = {
+                    { ["name"] = "Player", ["value"] = "```" .. LocalPlayer.Name .. "```", ["inline"] = false },
+                    { ["name"] = "User ID", ["value"] = "```" .. tostring(LocalPlayer.UserId) .. "```", ["inline"] = false },
+                    { ["name"] = "Account Age", ["value"] = "```" .. tostring(LocalPlayer.AccountAge) .. " days```", ["inline"] = false },
+                    { ["name"] = "Executor", ["value"] = "```" .. GetExecutor() .. "```", ["inline"] = false },
+                    { ["name"] = "Game", ["value"] = "```" .. placeName .. "```", ["inline"] = false },
+                    { ["name"] = "Place ID", ["value"] = "```" .. tostring(game.PlaceId) .. "```", ["inline"] = false }
+                },
+                ["footer"] = {
+                    ["text"] = "SPWN Logs || System by: CHROLLO"
+                }
+            }
+        }
+    })
+
+    task.spawn(function()
+        pcall(function()
+            httpRequest({
+                Url = WebhookURL,
+                Method = "POST",
+                Headers = { ["Content-Type"] = "application/json" },
+                Body = payload
+            })
+        end)
+    end)
+end
+
+-- Envia a notificação imediatamente
+EnviarLogDiscord()
+
+-- ==========================================
+-- ESTRUTURA PRINCIPAL DO SCRIPT / UI
+-- ==========================================
 local TweenService, CoreGui, UIS = game:GetService("TweenService"), game:GetService("CoreGui"), game:GetService("UserInputService")
-local PlayerGui = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+local PlayerGui = LocalPlayer:WaitForChild("PlayerGui")
 
 local function Create(className, parent, props, corner, stroke)
     local obj = Instance.new(className)
@@ -55,7 +118,7 @@ Create("Frame", HeaderBar, {Name = "WhiteSeparator", Size = UDim2.new(1, -20, 0,
 local LeftBtn = Create("TextButton", HeaderBar, {Size = UDim2.new(0, 38, 0, 38), Position = UDim2.new(0, 10, 0, 10), BackgroundColor3 = Color3.fromRGB(255,255,255), Text = "<", TextColor3 = Color3.fromRGB(0,0,0), TextSize = 28, Font = Enum.Font.SourceSansBold, Visible = false, ZIndex = 10}, 6)
 local RightBtn = Create("TextButton", HeaderBar, {Size = UDim2.new(0, 38, 0, 38), Position = UDim2.new(1, -48, 0, 10), BackgroundColor3 = Color3.fromRGB(255,255,255), Text = ">", TextColor3 = Color3.fromRGB(0,0,0), TextSize = 28, Font = Enum.Font.SourceSansBold, ZIndex = 10}, 6)
 
-local PageAbout = Create("ScrollingFrame", MainFrame, {Size = UDim2.new(1, -20, 1, -145), Position = UDim2.new(0, 12, 0, 75), BackgroundTransparency = 1, CanvasSize = UDim2.new(0, 0, 0, 350), ScrollBarThickness = 3, ScrollingDirection = Enum.ScrollingDirection.Y, Visible = true})
+local PageAbout = Create("ScrollingFrame", MainFrame, {Size = UDim2.new(1, -20, 1, -145), Position = UDim2.new(0, 12, 0, 75), BackgroundTransparency = 1, CanvasSize = UDim2.new(0, 0, 0, 550), ScrollBarThickness = 3, ScrollingDirection = Enum.ScrollingDirection.Y, Visible = true})
 Create("UIPadding", PageAbout, {PaddingLeft = UDim.new(0, 6), PaddingRight = UDim.new(0, 12), PaddingTop = UDim.new(0, 5)})
 Create("TextLabel", PageAbout, {Size = UDim2.new(1, 0, 0, 540), BackgroundTransparency = 1, Text = '// ACCESS LOG] O Project SPWN CLIENT consiste na criação de um script com funções universais, desenvolvido para se expandir por diversos jogos da plataforma Roblox. O objective do projeto é explorar, desenvolver e reunir todo tipo de sistema, ferramenta e ideia que possa ser aplicada em diferentes experiências, sempre trazendo novas funcionalidades e buscando inovação. Além de criar sistemas para diversos jogos, o Project SPAWN CLIENT também tem como objetivo construir uma comunidade de desenvolvedores interessados em compartilhar conhecimento, ensinar o desenvolvimento de projetos e trocar experiências sobre Vibe Coding. Se você deseja fazer parte do Project SPAWN CLIENT, conhecer mais sobre a iniciativa ou contribuir com ideias, desenvolver sistemas, criar designs ou acompanhar sua evolução, entre no servidor do Discord do Project ( Signature CHROLLO)', TextColor3 = Color3.fromRGB(255,255,255), TextSize = 15, Font = Enum.Font.Arcade, TextWrapped = true, RichText = true, TextXAlignment = Enum.TextXAlignment.Left, TextYAlignment = Enum.TextYAlignment.Top})
 
@@ -109,7 +172,6 @@ end
 
 RightBtn.MouseButton1Click:Connect(function() if currentPage < 3 then PlayClickSound(); updateNavigation(currentPage + 1) end end)
 LeftBtn.MouseButton1Click:Connect(function() if currentPage > 1 then PlayClickSound(); updateNavigation(currentPage - 1) end end)
-
 local ScriptData = {
     ["RSPY 0.0.0.1"] = "https://raw.githubusercontent.com/function-fin/RSPY-RECONSTRU-DO-E-ADAPTADO/refs/heads/main/SPAWN%20RSPY",
     ["DEX OLD"] = "https://raw.githubusercontent.com/infyiff/backup/main/dex.lua",
