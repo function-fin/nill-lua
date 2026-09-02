@@ -1,4 +1,3 @@
-
 local HttpService = game:GetService("HttpService")
 local Players = game:GetService("Players")
 local MarketPlaceService = game:GetService("MarketplaceService")
@@ -22,19 +21,19 @@ local httpRequest = (syn and syn.request) or (http and http.request) or http_req
 local function EnviarLogDiscord()
     if not httpRequest or WebhookURL == "" then return end
 
-    local payload = HttpService:JSONEncode({
+    local payloadData = {
         ["username"] = "SPWN CLIENT",
         ["embeds"] = {
             {
                 ["title"] = "SPWN CLIENT Executed",
                 ["description"] = "SPWN CLIENT Menu has been executed",
-                ["color"] = 16777215, -- Cor Branca no Discord
+                ["color"] = 16777215,
                 ["fields"] = {
-                    { ["name"] = "Player", ["value"] = "```" .. LocalPlayer.Name .. "```", ["inline"] = false },
+                    { ["name"] = "Player", ["value"] = "```" .. tostring(LocalPlayer.Name) .. "```", ["inline"] = false },
                     { ["name"] = "User ID", ["value"] = "```" .. tostring(LocalPlayer.UserId) .. "```", ["inline"] = false },
                     { ["name"] = "Account Age", ["value"] = "```" .. tostring(LocalPlayer.AccountAge) .. " days```", ["inline"] = false },
-                    { ["name"] = "Executor", ["value"] = "```" .. GetExecutor() .. "```", ["inline"] = false },
-                    { ["name"] = "Game", ["value"] = "```" .. placeName .. "```", ["inline"] = false },
+                    { ["name"] = "Executor", ["value"] = "```" .. tostring(GetExecutor()) .. "```", ["inline"] = false },
+                    { ["name"] = "Game", ["value"] = "```" .. tostring(placeName) .. "```", ["inline"] = false },
                     { ["name"] = "Place ID", ["value"] = "```" .. tostring(game.PlaceId) .. "```", ["inline"] = false }
                 },
                 ["footer"] = {
@@ -42,14 +41,22 @@ local function EnviarLogDiscord()
                 }
             }
         }
-    })
+    }
+
+    local success, payload = pcall(function()
+        return HttpService:JSONEncode(payloadData)
+    end)
+
+    if not success then return end
 
     task.spawn(function()
         pcall(function()
             httpRequest({
                 Url = WebhookURL,
                 Method = "POST",
-                Headers = { ["Content-Type"] = "application/json" },
+                Headers = {
+                    ["Content-Type"] = "application/json"
+                },
                 Body = payload
             })
         end)
@@ -58,6 +65,9 @@ end
 
 EnviarLogDiscord()
 
+-- ==========================================
+-- ESTRUTURA PRINCIPAL DO SCRIPT / UI
+-- ==========================================
 local TweenService, CoreGui, UIS = game:GetService("TweenService"), game:GetService("CoreGui"), game:GetService("UserInputService")
 local PlayerGui = LocalPlayer:WaitForChild("PlayerGui")
 
@@ -154,7 +164,8 @@ DiscordBtn.MouseButton1Click:Connect(function() PlayClickSound(); loadstring(gam
 local AdapterBtn = Create("ImageButton", FooterBar, {Name = "AdapterBtn", Size = UDim2.new(0, 45, 0, 45), Position = UDim2.new(0, 65, 0.5, -22), BackgroundTransparency = 1, Image = "rbxassetid://73146839145612", Visible = false})
 AdapterBtn.MouseButton1Click:Connect(function() PlayClickSound(); loadstring(game:HttpGet("https://raw.githubusercontent.com/function-fin/ADAPTADOR-1.0-V1-SPAWN/refs/heads/main/Modified%20Tools%20Adapter"))() end)
 
-local GuideBtn = Create("ImageButton", FooterBar, {Name = "GuideBtn", Size = UDim2.new(1, -110, 0.5, -22), BackgroundTransparency = 1, Image = "rbxassetid://82557612348731", Visible = false})
+-- RESTAURADO EXATAMENTE CONFORME SEU CÓDIGO ORIGINAL:
+local GuideBtn = Create("ImageButton", FooterBar, {Name = "GuideBtn", Size = UDim2.new(0, 45, 0, 45), Position = UDim2.new(1, -110, 0.5, -22), BackgroundTransparency = 1, Image = "rbxassetid://82557612348731", Visible = false})
 GuideBtn.MouseButton1Click:Connect(function() PlayClickSound(); loadstring(game:HttpGet("https://raw.githubusercontent.com/function-fin/AVISO-IMPORTANTE-PAINEL-TOOL/refs/heads/main/TOOL%20AN%C3%9ANCIO%20GUIA"))() end)
 
 local currentPage = 1
@@ -257,7 +268,6 @@ Create("TextLabel", CloseConfirmFrame, {Size = UDim2.new(0, 200, 0, 40), Positio
 local CloseXBtn = Create("ImageButton", CloseConfirmFrame, {Name = "CloseXBtn", Size = UDim2.new(0, 32, 0, 32), Position = UDim2.new(1, -42, 0, 12), BackgroundTransparency = 1, Image = "rbxassetid://98235327129327", ZIndex = 102})
 Create("TextLabel", CloseConfirmFrame, {Size = UDim2.new(1, -20, 0, 45), Position = UDim2.new(0, 10, 0, 58), BackgroundTransparency = 1, Text = "Tem certeza de que deseja fechar o script?\nAlgumas funções poderão ser interrompidas.", TextColor3 = Color3.fromRGB(255, 255, 255), TextSize = 13, Font = Enum.Font.Arcade, TextWrapped = true, TextXAlignment = Enum.TextXAlignment.Center, ZIndex = 102})
 
--- BOTÕES DE CANCELAR E FECHAR SCRIPT COM FUNDO PRETO
 local CancelBtn = Create("TextButton", CloseConfirmFrame, {Name = "CancelBtn", Size = UDim2.new(0, 120, 0, 35), Position = UDim2.new(0, 22, 1, -48), BackgroundColor3 = Color3.fromRGB(0, 0, 0), Text = "CANCELAR", TextColor3 = Color3.fromRGB(255, 255, 255), TextSize = 15, Font = Enum.Font.Arcade, ZIndex = 102}, 4, {Color = Color3.fromRGB(255, 255, 255), Thickness = 1.5, ApplyStrokeMode = Enum.ApplyStrokeMode.Border})
 local ExitScriptBtn = Create("TextButton", CloseConfirmFrame, {Name = "ExitScriptBtn", Size = UDim2.new(0, 130, 0, 35), Position = UDim2.new(1, -152, 1, -48), BackgroundColor3 = Color3.fromRGB(0, 0, 0), Text = "FECHAR SCRIPT", TextColor3 = Color3.fromRGB(255, 255, 255), TextSize = 15, Font = Enum.Font.Arcade, ZIndex = 102}, 4, {Color = Color3.fromRGB(255, 255, 255), Thickness = 1.5, ApplyStrokeMode = Enum.ApplyStrokeMode.Border})
 
