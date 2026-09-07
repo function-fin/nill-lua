@@ -83,7 +83,7 @@ local function Create(className, parent, props, corner, stroke)
     return obj
 end
 
-local ScreenGui = Create("ScreenGui", PlayerGui, {Name = "BrookHaven_V16_Final", ResetOnSpawn = false})
+local ScreenGui = Create("ScreenGui", PlayerGui, {Name = "BrookHaven_V16_Final", ResetOnSpawn = false, IgnoreGuiInset = true})
 local ClickSound = Create("Sound", ScreenGui, {SoundId = "rbxassetid://118415301510285", Volume = 1})
 
 local function PlayClickSound()
@@ -91,19 +91,20 @@ local function PlayClickSound()
     ClickSound:Play()
 end
 
--- Fundo Escurecido (Blur / Overlay)
+-- Fundo Escurecido Ampliado e Mais Escuro
 local DarkOverlay = Create("Frame", ScreenGui, {
     Name = "DarkOverlay",
-    Size = UDim2.new(1, 0, 1, 0),
-    Position = UDim2.new(0, 0, 0, 0),
+    AnchorPoint = Vector2.new(0.5, 0.5),
+    Position = UDim2.new(0.5, 0, 0.5, 0),
+    Size = UDim2.new(3, 0, 3, 0), -- Tamanho aumentado para garantir cobertura total
     BackgroundColor3 = Color3.fromRGB(0, 0, 0),
-    BackgroundTransparency = 0.5,
+    BackgroundTransparency = 0.25, -- Mais escuro
     BorderSizePixel = 0,
     Visible = true,
     ZIndex = 1
 })
 
--- Botão de Abrir/Fechar ajustado mais para cima (logo abaixo dos botões do Roblox)
+-- Botão de Abrir/Fechar
 local OpenBtn = Create("ImageButton", ScreenGui, {
     Name = "OpenBtn", 
     Position = UDim2.new(0, 50, 0, 55), 
@@ -222,7 +223,7 @@ RightBtn.MouseButton1Click:Connect(function() if currentPage < 3 then PlayClickS
 LeftBtn.MouseButton1Click:Connect(function() if currentPage > 1 then PlayClickSound(); updateNavigation(currentPage - 1) end end)
 
 local ScriptData = {
-["CLOCK V2 Deep SPWN"] = "https://raw.githubusercontent.com/function-fin/01/refs/heads/main/01",
+  ["CLOCK V2 Deep SPWN"] = "https://raw.githubusercontent.com/function-fin/01/refs/heads/main/01",
     ["RSPY 0.0.0.1"] = "https://raw.githubusercontent.com/function-fin/RSPY-RECONSTRU-DO-E-ADAPTADO/refs/heads/main/SPAWN%20RSPY",
     ["DEX OLD"] = "https://raw.githubusercontent.com/infyiff/backup/main/dex.lua",
     ["Terminal Join Server"] = "https://raw.githubusercontent.com/YuMAID369/Terminal-Join-Server-SpwnCub-/refs/heads/main/SPWN%20Join",
