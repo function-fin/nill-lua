@@ -185,7 +185,8 @@ Create("UIAspectRatioConstraint", SymbolAboutImage, {AspectRatio = 1})
 local PageScripts = Create("ScrollingFrame", MainFrame, {Size = UDim2.new(1, -15, 1, -145), Position = UDim2.new(0, 8, 0, 75), BackgroundTransparency = 1, Visible = false, CanvasSize = UDim2.new(0, 0, 0, 650), ScrollBarThickness = 3, ZIndex = 11})
 Create("UIGridLayout", PageScripts, {CellSize = UDim2.new(0, 96, 0, 52), CellPadding = UDim2.new(0, 5, 0, 6), HorizontalAlignment = Enum.HorizontalAlignment.Center})
 
-local PageTools = Create("ScrollingFrame", MainFrame, {Size = UDim2.new(1, -16, 1, -145), Position = UDim2.new(0, 8, 0, 75), BackgroundTransparency = 1, Visible = false, CanvasSize = UDim2.new(0, 0, 0, 180), ScrollBarThickness = 3, ScrollingEnabled = true, ZIndex = 11})
+-- Ajustado CanvasSize para 250 de altura para acomodar a nova tool
+local PageTools = Create("ScrollingFrame", MainFrame, {Size = UDim2.new(1, -16, 1, -145), Position = UDim2.new(0, 8, 0, 75), BackgroundTransparency = 1, Visible = false, CanvasSize = UDim2.new(0, 0, 0, 250), ScrollBarThickness = 3, ScrollingEnabled = true, ZIndex = 11})
 Create("UIGridLayout", PageTools, {CellSize = UDim2.new(0, 64, 0, 72), CellPadding = UDim2.new(0, 4, 0, 8), HorizontalAlignment = Enum.HorizontalAlignment.Center})
 
 local WhiteBarSeparator = Create("Frame", MainFrame, {Name = "WhiteBarSeparator", Size = UDim2.new(1, -20, 0, 4), Position = UDim2.new(0.5, 0, 1, -78), AnchorPoint = Vector2.new(0.5, 0), BackgroundColor3 = Color3.fromRGB(255,255,255), BorderSizePixel = 0, Visible = false, ZIndex = 11})
@@ -247,7 +248,7 @@ RightBtn.MouseButton1Click:Connect(function() if currentPage < 3 then PlayClickS
 LeftBtn.MouseButton1Click:Connect(function() if currentPage > 1 then PlayClickSound(); updateNavigation(currentPage - 1) end end)
 
 local ScriptData = {
- ["CLOCK V2 Deep SPWN"] = "https://raw.githubusercontent.com/function-fin/01/refs/heads/main/01",
+["CLOCK V2 Deep SPWN"] = "https://raw.githubusercontent.com/function-fin/01/refs/heads/main/01",
     ["RSPY 0.0.0.1"] = "https://raw.githubusercontent.com/function-fin/RSPY-RECONSTRU-DO-E-ADAPTADO/refs/heads/main/SPAWN%20RSPY",
     ["DEX OLD"] = "https://raw.githubusercontent.com/infyiff/backup/main/dex.lua",
     ["Terminal Join Server"] = "https://raw.githubusercontent.com/YuMAID369/Terminal-Join-Server-SpwnCub-/refs/heads/main/SPWN%20Join",
@@ -276,6 +277,7 @@ local ScriptData = {
     ["CHAT MICKEY"] = "https://rawscripts.net/raw/Brookhaven-RP-Mickey-Chat-85762",
     ["TELEKINESIS"] = "https://raw.githubusercontent.com/YuMAID369/TELEKINESIS-/refs/heads/main/Telekinesis%20Tool",
     ["FLING BALL V1"] = "https://raw.githubusercontent.com/YuMAID369/Fling-Ball-Cubnit-V1/refs/heads/main/Kill%20Ball%20V1",
+    ["FLING AURA BALL"] = "https://raw.githubusercontent.com/function-fin/Pr0t0tip0-aura-BA-/refs/heads/main/Aura%20BA/Aura%20BALL%20x1v2",
     ["SPEED EMOTE"] = "https://raw.githubusercontent.com/YuMAID369/CubnitSpeedEmote/refs/heads/main/EmoteSpeed",
     ["CHAT HIDDEN SPWN "] = "https://raw.githubusercontent.com/YuMAID369/Chat-Privado/refs/heads/main/OpenChatBeta",
     ["VIEW"] = "https://raw.githubusercontent.com/YuMAID369/View-SpawnCUB-/refs/heads/main/View%20Din%C3%A2mico%20Beta",
@@ -300,7 +302,8 @@ local ToolData = {
     {id = "7314683914564", name = "FLING\nAll SELECT V1", link = "https://raw.githubusercontent.com/YuMAID369/Atom-selector-/refs/heads/main/Target%20Kill"},
     {id = "7314683914565", name = "FLING\nAll SELECT V2", link = "https://raw.githubusercontent.com/YuMAID369/SELECT-MATTER/refs/heads/main/SPWN%20KILL%20V2%20SELECT"},
     {id = "7314683914566", name = "SELECT\nMATTER TP", link = "https://raw.githubusercontent.com/YuMAID369/ToolSpwnTp/refs/heads/main/SPWNTPtool"},
-    {id = "7314683914567", name = "SELECT\nMATTER V3", link = "https://raw.githubusercontent.com/YuMAID369/SELECT-MATTER-V3-/refs/heads/main/FLING%20V3%20TOOL%20SPWN"}
+    {id = "7314683914567", name = "SELECT\nMATTER V3", link = "https://raw.githubusercontent.com/YuMAID369/SELECT-MATTER-V3-/refs/heads/main/FLING%20V3%20TOOL%20SPWN"},
+    {id = "7314683914568", name = "FLING AURA\nBALL", link = "https://raw.githubusercontent.com/function-fin/Pr0t0tip0-aura-BA-/refs/heads/main/Aura%20BA/Aura%20BALL%20x1v2"}
 }
 
 for _, data in ipairs(ToolData) do
