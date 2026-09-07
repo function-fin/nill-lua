@@ -83,7 +83,18 @@ local function Create(className, parent, props, corner, stroke)
     return obj
 end
 
-local ScreenGui = Create("ScreenGui", PlayerGui, {Name = "BrookHaven_V16_Final", ResetOnSpawn = false, IgnoreGuiInset = true})
+-- Define o CoreGui como prioridade (ou PlayerGui como fallback)
+local targetParent = (pcall(function() return game:GetService("CoreGui") end) and game:GetService("CoreGui")) or PlayerGui
+
+-- DisplayOrder = 1 garante prioridade sobre a Backpack (que é DisplayOrder = 0)
+local ScreenGui = Create("ScreenGui", targetParent, {
+    Name = "BrookHaven_V16_Final", 
+    ResetOnSpawn = false, 
+    IgnoreGuiInset = true,
+    DisplayOrder = 1,
+    ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+})
+
 local ClickSound = Create("Sound", ScreenGui, {SoundId = "rbxassetid://118415301510285", Volume = 1})
 
 local function PlayClickSound()
@@ -117,8 +128,13 @@ local OpenBtn = Create("ImageButton", ScreenGui, {
     ZIndex = 50
 })
 
+-- Painel Principal no Centro
+local MainFrame = Create("Frame", ScreenGui, {Name = "MainFrame", AnchorPoint = Vector2.new(0.5, 0.5), Position = UDim2.new(0.5, 0, 0.5, 0), Size = UDim2.new(0, 420, 0, 310), BackgroundColor3 = Color3.fromRGB(0,0,0), BorderSizePixel = 0, Active = true, Draggable = true, Visible = true, ZIndex = 10}, 8, {Color = Color3.fromRGB(255, 255, 255), Thickness = 1, ApplyStrokeMode = Enum.ApplyStrokeMode.Border})
+
+-- Lógica de arrastar o OpenBtn (Bloqueada quando a UI estiver aberta)
 local dragToggle, dragStart, startPos
 OpenBtn.InputBegan:Connect(function(input)
+    if MainFrame.Visible then return end -- Impede iniciar o arraste se a interface estiver aberta
     if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
         dragToggle, dragStart, startPos = true, input.Position, OpenBtn.Position
         if OpenBtn.AnchorPoint ~= Vector2.new(0, 0) then
@@ -128,15 +144,20 @@ OpenBtn.InputBegan:Connect(function(input)
     end
 end)
 UIS.InputChanged:Connect(function(input)
+    if MainFrame.Visible then 
+        dragToggle = false 
+        return 
+    end -- Impede arrastar se a interface estiver aberta
     if dragToggle and (input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch) then
         local delta = input.Position - dragStart
         OpenBtn.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
     end
 end)
-UIS.InputEnded:Connect(function(input) if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then dragToggle = false end end)
-
--- Painel Principal no Centro
-local MainFrame = Create("Frame", ScreenGui, {Name = "MainFrame", AnchorPoint = Vector2.new(0.5, 0.5), Position = UDim2.new(0.5, 0, 0.5, 0), Size = UDim2.new(0, 420, 0, 310), BackgroundColor3 = Color3.fromRGB(0,0,0), BorderSizePixel = 0, Active = true, Draggable = true, Visible = true, ZIndex = 10}, 8, {Color = Color3.fromRGB(255, 255, 255), Thickness = 1, ApplyStrokeMode = Enum.ApplyStrokeMode.Border})
+UIS.InputEnded:Connect(function(input) 
+    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then 
+        dragToggle = false 
+    end 
+end)
 
 local HeaderBar = Create("Frame", MainFrame, {Size = UDim2.new(1, 0, 0, 65), BackgroundTransparency = 1, ZIndex = 11})
 local Title = Create("TextLabel", HeaderBar, {Size = UDim2.new(1, 0, 0, 50), Position = UDim2.new(0, 0, 0, 5), BackgroundTransparency = 1, Text = "Sobre o ᓵ⚍ʖリ╎ℸ ", TextColor3 = Color3.fromRGB(255,255,255), TextSize = 28, Font = Enum.Font.Arcade, TextWrapped = true, TextXAlignment = Enum.TextXAlignment.Center, TextYAlignment = Enum.TextYAlignment.Center, ZIndex = 11})
@@ -176,6 +197,9 @@ local CloseBtn = Create("TextButton", FooterBar, {Name = "CloseBtn", Size = UDim
 local function ToggleMenu(state)
     MainFrame.Visible = state
     DarkOverlay.Visible = state
+    if state then
+        dragToggle = false -- Cancela o movimento do botão ao abrir a UI
+    end
 end
 
 CloseBtn.MouseButton1Click:Connect(function()
@@ -223,7 +247,7 @@ RightBtn.MouseButton1Click:Connect(function() if currentPage < 3 then PlayClickS
 LeftBtn.MouseButton1Click:Connect(function() if currentPage > 1 then PlayClickSound(); updateNavigation(currentPage - 1) end end)
 
 local ScriptData = {
-  ["CLOCK V2 Deep SPWN"] = "https://raw.githubusercontent.com/function-fin/01/refs/heads/main/01",
+ ["CLOCK V2 Deep SPWN"] = "https://raw.githubusercontent.com/function-fin/01/refs/heads/main/01",
     ["RSPY 0.0.0.1"] = "https://raw.githubusercontent.com/function-fin/RSPY-RECONSTRU-DO-E-ADAPTADO/refs/heads/main/SPAWN%20RSPY",
     ["DEX OLD"] = "https://raw.githubusercontent.com/infyiff/backup/main/dex.lua",
     ["Terminal Join Server"] = "https://raw.githubusercontent.com/YuMAID369/Terminal-Join-Server-SpwnCub-/refs/heads/main/SPWN%20Join",
@@ -231,7 +255,7 @@ local ScriptData = {
     ["CLOCK CREATOR PROPs"] = "https://raw.githubusercontent.com/YuMAID369/CLOCK-Creator-Project-PROP-SPWN/refs/heads/main/CLOCK%20Creator%20Project%20PROP%20SPWN%20CLIENT%20V1",
     ["DELETE PLAYER Anti NUKE"] = "https://raw.githubusercontent.com/YuMAID369/Anti-PLAYER-/refs/heads/main/REMOVE%20PLAYER",
     ["Summoner Vehicles Panel"] = "https://raw.githubusercontent.com/YuMAID369/VEHICLE-KILL-PANEL-/refs/heads/main/Summoner%20Vehicles%20V1%20KILL",
-    ["Notepad notes v1"] = "https://raw.githubusercontent.com/YuMAID369/Bloco-de-Notas-SpawnCUB/refs/heads/main/Notebook%20Notes",
+    ["HIDDEN LIBRARY SPWN"] = "https://raw.githubusercontent.com/YuMAID369/Bloco-de-Notas-SpawnCUB/refs/heads/main/Notebook%20Notes",
     ["Cronômetro V1"] = "https://raw.githubusercontent.com/YuMAID369/Cron-metro-Spwn-v1/refs/heads/main/00%3A00%3A00",
     ["ENTER ID#"] = "https://raw.githubusercontent.com/YuMAID369/ENTER-ID-/refs/heads/main/ENTER%20ID%23%20000",
     ["COORDENADAS"] = "https://raw.githubusercontent.com/YuMAID369/Coordenadas-Ui-/refs/heads/main/Coordenadas%20SPWN%20V1",
@@ -253,7 +277,7 @@ local ScriptData = {
     ["TELEKINESIS"] = "https://raw.githubusercontent.com/YuMAID369/TELEKINESIS-/refs/heads/main/Telekinesis%20Tool",
     ["FLING BALL V1"] = "https://raw.githubusercontent.com/YuMAID369/Fling-Ball-Cubnit-V1/refs/heads/main/Kill%20Ball%20V1",
     ["SPEED EMOTE"] = "https://raw.githubusercontent.com/YuMAID369/CubnitSpeedEmote/refs/heads/main/EmoteSpeed",
-    ["CHAT SPAWNCUB"] = "https://raw.githubusercontent.com/YuMAID369/Chat-Privado/refs/heads/main/OpenChatBeta",
+    ["CHAT HIDDEN SPWN "] = "https://raw.githubusercontent.com/YuMAID369/Chat-Privado/refs/heads/main/OpenChatBeta",
     ["VIEW"] = "https://raw.githubusercontent.com/YuMAID369/View-SpawnCUB-/refs/heads/main/View%20Din%C3%A2mico%20Beta",
     ["PHYSICS"] = "https://raw.githubusercontent.com/YuMAID369/Humanoid-physics-manipulation/refs/heads/main/Physics%20Alterer",
     ["SKYBOX NUKE"] = "https://raw.githubusercontent.com/YuMAID369/SKYBOX-V1/refs/heads/main/SKYBOX-SPAWN",
