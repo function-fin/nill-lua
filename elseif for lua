@@ -287,7 +287,8 @@ local ScriptData = {
     ["TOOL FLING ALL SELECT"] = "https://raw.githubusercontent.com/YuMAID369/Atom-selector-/refs/heads/main/Target%20Kill",
     ["SELECT MATTER V2"] = "https://raw.githubusercontent.com/YuMAID369/SELECT-MATTER/refs/heads/main/SPWN%20KILL%20V2%20SELECT",
     ["SELECT MATTER V3"] = "https://raw.githubusercontent.com/YuMAID369/SELECT-MATTER-V3-/refs/heads/main/FLING%20V3%20TOOL%20SPWN",
-    ["VIEW V2 VRP"] = "https://raw.githubusercontent.com/YuMAID369/UI-View-V2-VPR/refs/heads/main/V2View%20VPR"
+    ["VIEW V2 VRP"] = "https://raw.githubusercontent.com/YuMAID369/UI-View-V2-VPR/refs/heads/main/V2View%20VPR",
+    ["Prop data collector"] = "https://raw.githubusercontent.com/function-fin/Prop-data-collector-/refs/heads/main/Analyze%20structured%20data",
 }
 
 for name, link in pairs(ScriptData) do
