@@ -264,6 +264,7 @@ local ScriptData = {
     ["SELECT MATTER TP"] = "https://raw.githubusercontent.com/YuMAID369/ToolSpwnTp/refs/heads/main/SPWNTPtool",
     ["TIME STOP V1 BETA"] = "https://raw.githubusercontent.com/YuMAID369/TIME-STOP-V1-SPWN-/refs/heads/main/Stop%20time%20SpwnCub",
     ["HUMANOID STATUS VIEW"] = "https://raw.githubusercontent.com/YuMAID369/Humanoid-Status-VIEW-/refs/heads/main/SPWNCUB",
+ ["Documentation"] = "https://raw.githubusercontent.com/function-fin/Lore-confidential-document/refs/heads/main/Paperwork",
     ["FLY GUI MARK"] = "https://raw.githubusercontent.com/YuMAID369/MARK-V1-FLY-GUI-/refs/heads/main/MARK%20FLY%20GUI%20V2",
     ["BAN HOUSE"] = "https://raw.githubusercontent.com/YuMAID369/BAN-HOUSE-/refs/heads/main/BrookHaven",
     ["INSPECIONAR AVATAR"] = "https://raw.githubusercontent.com/YuMAID369/INSPECT-AV2/refs/heads/main/idsAV2",
