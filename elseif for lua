@@ -278,6 +278,7 @@ local ScriptData = {
     ["TP POINT"] = "https://raw.githubusercontent.com/YuMAID369/Teletransporte-/refs/heads/main/SpawnCUB",
     ["FREE CAM"] = "https://raw.githubusercontent.com/YuMAID369/SpawnCam/refs/heads/main/Universal%20Cam",
     ["CHAT MICKEY"] = "https://rawscripts.net/raw/Brookhaven-RP-Mickey-Chat-85762",
+["Prop R15 Structure"] = "https://raw.githubusercontent.com/function-fin/ROBOT-R15/refs/heads/main/PROP%20ROBOT",
     ["TELEKINESIS"] = "https://raw.githubusercontent.com/YuMAID369/TELEKINESIS-/refs/heads/main/Telekinesis%20Tool",
     ["FLING BALL V1"] = "https://raw.githubusercontent.com/YuMAID369/Fling-Ball-Cubnit-V1/refs/heads/main/Kill%20Ball%20V1",
     ["FLING AURA BALL"] = "https://raw.githubusercontent.com/function-fin/Pr0t0tip0-aura-BA-/refs/heads/main/Aura%20BA/Aura%20BALL%20x1v2",
