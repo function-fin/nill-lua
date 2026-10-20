@@ -400,6 +400,7 @@ local ScriptData = {
     ["CHINOOK ANNOY"] = "https://raw.githubusercontent.com/function-fin/PROJECT-CHINOOK/refs/heads/main/0.1",
     ["SELECT MATTER TP"] = "https://raw.githubusercontent.com/YuMAID369/ToolSpwnTp/refs/heads/main/SPWNTPtool",
     ["TIME STOP V1 BETA"] = "https://raw.githubusercontent.com/YuMAID369/TIME-STOP-V1-SPWN-/refs/heads/main/Stop%20time%20SpwnCub",
+    ["BUFF Humanoid Simple"] = "https://raw.githubusercontent.com/function-fin/Buff-Simple/refs/heads/main/SIMPLE%20BUFF%20UPDATE",
     ["SCANNER PARTS AND MATTER"] = "https://raw.githubusercontent.com/function-fin/Scanner-MATTER-Server/refs/heads/main/Scanner%20MATTER%20Beta",
     ["HUMANOID STATUS VIEW"] = "https://raw.githubusercontent.com/YuMAID369/Humanoid-Status-VIEW-/refs/heads/main/SPWNCUB",
     ["Documentation"] = "https://raw.githubusercontent.com/function-fin/Lore-confidential-document/refs/heads/main/Paperwork",
