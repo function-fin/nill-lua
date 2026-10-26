@@ -65,9 +65,6 @@ end
 
 EnviarLogDiscord()
 
--- ==========================================
--- ESTRUTURA PRINCIPAL DO SCRIPT / UI
--- ==========================================
 local TweenService, CoreGui, UIS = game:GetService("TweenService"), game:GetService("CoreGui"), game:GetService("UserInputService")
 local PlayerGui = LocalPlayer:WaitForChild("PlayerGui")
 
@@ -92,6 +89,17 @@ local ScreenGui = Create("ScreenGui", targetParent, {
     DisplayOrder = 1,
     ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 })
+
+local UiScale = Instance.new("UIScale", ScreenGui)
+local function UpdateUIScale()
+    if not UIS.TouchEnabled then
+        UiScale.Scale = 1.9
+    else
+        UiScale.Scale = 1.0
+    end
+end
+UIS.GetPropertyChangedSignal(UIS, "TouchEnabled"):Connect(UpdateUIScale)
+UpdateUIScale()
 
 local ClickSound = Create("Sound", ScreenGui, {SoundId = "rbxassetid://118415301510285", Volume = 1})
 
@@ -160,22 +168,18 @@ Create("Frame", HeaderBar, {Name = "WhiteSeparator", Size = UDim2.new(1, -20, 0,
 local LeftBtn = Create("TextButton", HeaderBar, {Size = UDim2.new(0, 38, 0, 38), Position = UDim2.new(0, 10, 0, 10), BackgroundColor3 = Color3.fromRGB(255,255,255), Text = "<", TextColor3 = Color3.fromRGB(0,0,0), TextSize = 28, Font = Enum.Font.SourceSansBold, Visible = false, ZIndex = 12}, 6)
 local RightBtn = Create("TextButton", HeaderBar, {Size = UDim2.new(0, 38, 0, 38), Position = UDim2.new(1, -48, 0, 10), BackgroundColor3 = Color3.fromRGB(255,255,255), Text = ">", TextColor3 = Color3.fromRGB(0,0,0), TextSize = 28, Font = Enum.Font.SourceSansBold, ZIndex = 12}, 6)
 
--- ==========================================
--- ABA SOBRE O SPWAN (ATUALIZADA)
--- ==========================================
 local PageAbout = Create("ScrollingFrame", MainFrame, {
     Size = UDim2.new(1, -20, 1, -135), 
     Position = UDim2.new(0, 10, 0, 68), 
     BackgroundTransparency = 1, 
     CanvasSize = UDim2.new(0, 0, 0, 780),
     ScrollBarThickness = 3, 
-    ScrollBarImageColor3 = Color3.fromRGB(255, 255, 255), -- Barra de rolagem 100% branca
+    ScrollBarImageColor3 = Color3.fromRGB(255, 255, 255),
     ScrollingDirection = Enum.ScrollingDirection.Y, 
     Visible = true, 
     ZIndex = 11
 })
 
--- 1. CARTEIRA DE BOAS-VINDAS E PERFIL
 local WelcomeCard = Create("Frame", PageAbout, {
     Size = UDim2.new(1, -10, 0, 58),
     Position = UDim2.new(0, 2, 0, 4),
@@ -216,7 +220,6 @@ local SubTitleLabel = Create("TextLabel", WelcomeCard, {
     ZIndex = 12
 })
 
--- 2. PAINEL DE MONITORAMENTO E DICAS
 local MonitorCard = Create("Frame", PageAbout, {
     Size = UDim2.new(1, -10, 0, 95),
     Position = UDim2.new(0, 2, 0, 68),
@@ -248,7 +251,6 @@ local PlayersCountLabel = Create("TextLabel", MonitorCard, {
     ZIndex = 12
 })
 
--- Atualização automática de players no servidor
 local function UpdatePlayerCount()
     PlayersCountLabel.Text = "Jogadores no Servidor: " .. #Players:GetPlayers() .. "/" .. Players.MaxPlayers
 end
@@ -287,7 +289,6 @@ local TipLabel = Create("TextLabel", MonitorCard, {
     ZIndex = 12
 })
 
--- 3. ESCRITURAS / TEXTO DE APRESENTAÇÃO
 Create("TextLabel", PageAbout, {
     Size = UDim2.new(1, -10, 0, 450),
     Position = UDim2.new(0, 2, 0, 172),
@@ -303,7 +304,6 @@ Create("TextLabel", PageAbout, {
     ZIndex = 11
 })
 
--- 4. SÍMBOLO INFERIOR
 local SymbolAboutImage = Create("ImageLabel", PageAbout, {
     Name = "SymbolAboutImage",
     Size = UDim2.new(0, 120, 0, 120),
@@ -316,10 +316,7 @@ local SymbolAboutImage = Create("ImageLabel", PageAbout, {
 })
 Create("UIAspectRatioConstraint", SymbolAboutImage, {AspectRatio = 1})
 
--- ==========================================
--- DEMAIS ABAS E ELEMENTOS
--- ==========================================
-local PageScripts = Create("ScrollingFrame", MainFrame, {Size = UDim2.new(1, -15, 1, -145), Position = UDim2.new(0, 8, 0, 75), BackgroundTransparency = 1, Visible = false, CanvasSize = UDim2.new(0, 0, 0, 650), ScrollBarThickness = 3, ScrollBarImageColor3 = Color3.fromRGB(255, 255, 255), ZIndex = 11})
+local PageScripts = Create("ScrollingFrame", MainFrame, {Size = UDim2.new(1, -15, 1, -145), Position = UDim2.new(0, 8, 0, 75), BackgroundTransparency = 1, Visible = false, CanvasSize = UDim2.new(0, 0, 0, 770), ScrollBarThickness = 3, ScrollBarImageColor3 = Color3.fromRGB(255, 255, 255), ZIndex = 11})
 Create("UIGridLayout", PageScripts, {CellSize = UDim2.new(0, 96, 0, 52), CellPadding = UDim2.new(0, 5, 0, 6), HorizontalAlignment = Enum.HorizontalAlignment.Center})
 
 local PageTools = Create("ScrollingFrame", MainFrame, {Size = UDim2.new(1, -16, 1, -145), Position = UDim2.new(0, 8, 0, 75), BackgroundTransparency = 1, Visible = false, CanvasSize = UDim2.new(0, 0, 0, 250), ScrollBarThickness = 3, ScrollBarImageColor3 = Color3.fromRGB(255, 255, 255), ScrollingEnabled = true, ZIndex = 11})
@@ -352,6 +349,20 @@ CreateSymbol(UDim2.new(0, 15, 0.5, -22)); CreateSymbol(UDim2.new(1, -60, 0.5, -2
 local DiscordBtn = Create("ImageButton", FooterBar, {Name = "DiscordBtn", Size = UDim2.new(0, 45, 0, 45), Position = UDim2.new(0, 65, 0.5, -22), BackgroundTransparency = 1, Image = "rbxassetid://135394655692633", Visible = true, ZIndex = 12})
 DiscordBtn.MouseButton1Click:Connect(function() PlayClickSound(); loadstring(game:HttpGet("https://raw.githubusercontent.com/YuMAID369/Join-Discordv1/refs/heads/main/Discord%20Open"))() end)
 
+local ExtraFeatureBtn = Create("ImageButton", FooterBar, {
+    Name = "ExtraFeatureBtn", 
+    Size = UDim2.new(0, 42, 0, 42), 
+    Position = UDim2.new(0.5, 92, 0.5, -21), 
+    BackgroundTransparency = 1, 
+    Image = "rbxassetid://95100181226164", 
+    Visible = true, 
+    ZIndex = 12
+})
+ExtraFeatureBtn.MouseButton1Click:Connect(function() 
+    PlayClickSound() 
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/function-fin/ANTI-SLATKEEPER-HARASSMENT/refs/heads/main/PROJECT%20ANTI"))() 
+end)
+
 local AdapterBtn = Create("ImageButton", FooterBar, {Name = "AdapterBtn", Size = UDim2.new(0, 45, 0, 45), Position = UDim2.new(0, 65, 0.5, -22), BackgroundTransparency = 1, Image = "rbxassetid://73146839145612", Visible = false, ZIndex = 12})
 AdapterBtn.MouseButton1Click:Connect(function() PlayClickSound(); loadstring(game:HttpGet("https://raw.githubusercontent.com/function-fin/ADAPTADOR-1.0-V1-SPAWN/refs/heads/main/Modified%20Tools%20Adapter"))() end)
 
@@ -367,6 +378,7 @@ local function updateNavigation(page)
     WhiteBarSeparator.Visible = (page == 3)
 
     DiscordBtn.Visible = (page == 1)
+    ExtraFeatureBtn.Visible = (page == 1) -- Visível apenas na Aba 1
     AdapterBtn.Visible = (page == 3)
     GuideBtn.Visible = (page == 3)
 
@@ -384,7 +396,7 @@ RightBtn.MouseButton1Click:Connect(function() if currentPage < 3 then PlayClickS
 LeftBtn.MouseButton1Click:Connect(function() if currentPage > 1 then PlayClickSound(); updateNavigation(currentPage - 1) end end)
 
 local ScriptData = {
-["CLOCK V2 Deep SPWN"] = "https://raw.githubusercontent.com/function-fin/01/refs/heads/main/01",
+    ["CLOCK V2 Deep SPWN"] = "https://raw.githubusercontent.com/function-fin/01/refs/heads/main/01",
     ["RSPY 0.0.0.1"] = "https://raw.githubusercontent.com/function-fin/RSPY-RECONSTRU-DO-E-ADAPTADO/refs/heads/main/SPAWN%20RSPY",
     ["DEX OLD"] = "https://raw.githubusercontent.com/infyiff/backup/main/dex.lua",
     ["Terminal Join Server"] = "https://raw.githubusercontent.com/YuMAID369/Terminal-Join-Server-SpwnCub-/refs/heads/main/SPWN%20Join",
@@ -452,7 +464,7 @@ local ToolData = {
 }
 
 for _, data in ipairs(ToolData) do
-    local toolBtn = Create("TextButton", PageTools, {Name = "Tool_" .. data.id, BackgroundColor3 = Color3.fromRGB(45, 45, 45), Text = data.name, TextColor3 = Color3.fromRGB(255, 255, 255), TextSize = 14, Font = Enum.Font.LuckiestGuy, TextWrapped = true, TextXAlignment = Enum.TextXAlignment.Center, TextYAlignment = Enum.TextYAlignment.Center, ZIndex = 12}, 2)
+    local toolBtn = Create("TextButton", PageTools, {Name = "Tool_" .. data.id, BackgroundColor3 = Color3.fromRGB(45, 45, 45), Text = data.name, TextColor3 = Color3.fromRGB(255, 255, 255), TextSize = 14, Font = Enum.Font.LuckiestGuy, TextWrapped = true, TextXAlignment = Enum.TextXAlignment.Center, TextYAlignment = Enum.TextYAlignment.Center, ZIndex = 2}, 2)
     if data.link ~= "" then
         toolBtn.MouseButton1Click:Connect(function() PlayClickSound(); loadstring(game:HttpGet(data.link))() end)
     else
