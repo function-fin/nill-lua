@@ -120,6 +120,7 @@ local DarkOverlay = Create("Frame", ScreenGui, {
     ZIndex = 1
 })
 
+-- Botão Externo com ZIndex alto para garantir que seja clicável
 local OpenBtn = Create("ImageButton", ScreenGui, {
     Name = "OpenBtn", 
     Position = UDim2.new(0, 50, 0, 55), 
@@ -129,7 +130,7 @@ local OpenBtn = Create("ImageButton", ScreenGui, {
     Image = "rbxassetid://131615335465809", 
     ImageTransparency = 0, 
     Visible = true,
-    ZIndex = 50
+    ZIndex = 500
 })
 
 local MainFrame = Create("Frame", ScreenGui, {Name = "MainFrame", AnchorPoint = Vector2.new(0.5, 0.5), Position = UDim2.new(0.5, 0, 0.5, 0), Size = UDim2.new(0, 420, 0, 310), BackgroundColor3 = Color3.fromRGB(0,0,0), BorderSizePixel = 0, Active = true, Draggable = true, Visible = true, ZIndex = 10}, 8, {Color = Color3.fromRGB(255, 255, 255), Thickness = 1, ApplyStrokeMode = Enum.ApplyStrokeMode.Border})
@@ -293,7 +294,7 @@ Create("TextLabel", PageAbout, {
     Size = UDim2.new(1, -10, 0, 450),
     Position = UDim2.new(0, 2, 0, 172),
     BackgroundTransparency = 1,
-    Text = '// ACCESS LOG] O Project SPWN CLIENT consiste na criação de um script com funções universais, desenvolvido para se expandir por diversos jogos da plataforma Roblox. O objective do projeto é explorar, desenvolver e reunir todo tipo de sistema, ferramenta e ideia que possa ser aplicada em diferentes experiências, sempre trazendo novas funcionalidades e buscando inovação. Além de criar sistemas para diversos jogos, o Project SPAWN CLIENT também tem como objetivo construir uma comunidade de desenvolvedores interessados em compartilhar conhecimento, ensinar o desenvolvimento de projetos e trocar experiências sobre Vibe Coding. Se você deseja fazer parte do Project SPAWN CLIENT, conhecer mais sobre a iniciativa ou contribuir com ideias, desenvolver sistemas, criar designs ou acompanhar sua evolução, entre no servidor do Discord do Project ( Signature CHROLLO)',
+    Text = '// ACCESS LOG] O Project SPWN CLIENT consiste na criação de um script com funções universais, desenvolvido para se expandir por diversos jogos da plataforma Roblox. O objective do projeto é explorar, desenvolver e reunir todo tipo de sistema, ferramenta e ideia que possa ser aplicada em diferentes experiências, sempre trazendo novas funcionalidades e buscando inovação. Além de criar sistemas para diversos jogos, o Project SPAWN CLIENT também tem como objetivo construir uma comunidade de desenvolvedores interessados em compartilhar conhecimento, ensinar o desenvolvimento de projetos e trocar experiências sobre Vibe Coding. Se você deseja fazer parte do Project SPWN CLIENT, conhecer mais sobre a iniciativa ou contribuir com ideias, desenvolver sistemas, criar designs ou acompanhar sua evolução, entre no servidor do Discord do Project ( Signature CHROLLO)',
     TextColor3 = Color3.fromRGB(255, 255, 255),
     TextSize = 13,
     Font = Enum.Font.Arcade,
@@ -363,6 +364,20 @@ ExtraFeatureBtn.MouseButton1Click:Connect(function()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/function-fin/ANTI-SLATKEEPER-HARASSMENT/refs/heads/main/PROJECT%20ANTI"))() 
 end)
 
+local NewFeatureBtn = Create("ImageButton", FooterBar, {
+    Name = "NewFeatureBtn", 
+    Size = UDim2.new(0, 42, 0, 42), 
+    Position = UDim2.new(0.5, -140, 0.5, -21), 
+    BackgroundTransparency = 1, 
+    Image = "rbxassetid://80947825662336", 
+    Visible = false, 
+    ZIndex = 12
+})
+NewFeatureBtn.MouseButton1Click:Connect(function() 
+    PlayClickSound() 
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/function-fin/ARMAZ-M-E-ORDEM-/refs/heads/main/Beta%20Ordem"))() 
+end)
+
 local AdapterBtn = Create("ImageButton", FooterBar, {Name = "AdapterBtn", Size = UDim2.new(0, 45, 0, 45), Position = UDim2.new(0, 65, 0.5, -22), BackgroundTransparency = 1, Image = "rbxassetid://73146839145612", Visible = false, ZIndex = 12})
 AdapterBtn.MouseButton1Click:Connect(function() PlayClickSound(); loadstring(game:HttpGet("https://raw.githubusercontent.com/function-fin/ADAPTADOR-1.0-V1-SPAWN/refs/heads/main/Modified%20Tools%20Adapter"))() end)
 
@@ -378,7 +393,8 @@ local function updateNavigation(page)
     WhiteBarSeparator.Visible = (page == 3)
 
     DiscordBtn.Visible = (page == 1)
-    ExtraFeatureBtn.Visible = (page == 1) -- Visível apenas na Aba 1
+    ExtraFeatureBtn.Visible = (page == 1)
+    NewFeatureBtn.Visible = (page == 2)
     AdapterBtn.Visible = (page == 3)
     GuideBtn.Visible = (page == 3)
 
@@ -410,7 +426,7 @@ local ScriptData = {
     ["CALCULATOR STUDIES"] = "https://raw.githubusercontent.com/function-fin/Roblox-Studs-Calculator-Beta/refs/heads/main/STUDS%20Calculecter0.0.0.0.1",
     ["SPWAN Coordinates"] = "https://raw.githubusercontent.com/YuMAID369/Coordenadas-Ui-/refs/heads/main/Coordenadas%20SPWN%20V1",
     ["Vehicle Speed Upgrade"] = "https://raw.githubusercontent.com/function-fin/Ve-culo-Upgrade-Turbo-/refs/heads/main/Vehicle%20S",
-["40k Emotes SPWAM"] = "https://raw.githubusercontent.com/function-fin/Roblox-/refs/heads/main/TESTES",
+    ["40k Emotes SPWAM"] = "https://raw.githubusercontent.com/function-fin/Roblox-/refs/heads/main/TESTES",
     ["CHINOOK ANNOY"] = "https://raw.githubusercontent.com/function-fin/PROJECT-CHINOOK/refs/heads/main/0.1",
     ["SELECT MATTER TP"] = "https://raw.githubusercontent.com/YuMAID369/ToolSpwnTp/refs/heads/main/SPWNTPtool",
     ["TIME STOP V1 BETA"] = "https://raw.githubusercontent.com/YuMAID369/TIME-STOP-V1-SPWN-/refs/heads/main/Stop%20time%20SpwnCub",
@@ -464,7 +480,7 @@ local ToolData = {
 }
 
 for _, data in ipairs(ToolData) do
-    local toolBtn = Create("TextButton", PageTools, {Name = "Tool_" .. data.id, BackgroundColor3 = Color3.fromRGB(45, 45, 45), Text = data.name, TextColor3 = Color3.fromRGB(255, 255, 255), TextSize = 14, Font = Enum.Font.LuckiestGuy, TextWrapped = true, TextXAlignment = Enum.TextXAlignment.Center, TextYAlignment = Enum.TextYAlignment.Center, ZIndex = 2}, 2)
+    local toolBtn = Create("TextButton", PageTools, {Name = "Tool_" .. data.id, BackgroundColor3 = Color3.fromRGB(45, 45, 45), Text = data.name, TextColor3 = Color3.fromRGB(255, 255, 255), TextSize = 14, Font = Enum.Font.LuckiestGuy, TextWrapped = true, TextXAlignment = Enum.TextXAlignment.Center, TextYAlignment = Enum.TextYAlignment.Center, ZIndex = 12}, 2)
     if data.link ~= "" then
         toolBtn.MouseButton1Click:Connect(function() PlayClickSound(); loadstring(game:HttpGet(data.link))() end)
     else
