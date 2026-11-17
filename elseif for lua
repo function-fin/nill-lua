@@ -433,6 +433,7 @@ local ScriptData = {
     ["BUFF Humanoid Simple"] = "https://raw.githubusercontent.com/function-fin/Buff-Simple/refs/heads/main/SIMPLE%20BUFF%20UPDATE",
     ["SCANNER PARTS AND MATTER"] = "https://raw.githubusercontent.com/function-fin/Scanner-MATTER-Server/refs/heads/main/Scanner%20MATTER%20Beta",
     ["HUMANOID STATUS VIEW"] = "https://raw.githubusercontent.com/YuMAID369/Humanoid-Status-VIEW-/refs/heads/main/SPWNCUB",
+["INSPECIONAR TELA DESING V1"] = "https://raw.githubusercontent.com/function-fin/Desing-SIZE-ui-Project/refs/heads/main/SYLAS",
     ["Documentation"] = "https://raw.githubusercontent.com/function-fin/Lore-confidential-document/refs/heads/main/Paperwork",
     ["FLY GUI MARK"] = "https://raw.githubusercontent.com/YuMAID369/MARK-V1-FLY-GUI-/refs/heads/main/MARK%20FLY%20GUI%20V2",
     ["BAN HOUSE"] = "https://raw.githubusercontent.com/YuMAID369/BAN-HOUSE-/refs/heads/main/BrookHaven",
