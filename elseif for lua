@@ -378,6 +378,21 @@ NewFeatureBtn.MouseButton1Click:Connect(function()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/function-fin/ARMAZ-M-E-ORDEM-/refs/heads/main/Beta%20Ordem"))() 
 end)
 
+-- Posicionado perfeitamente ao lado oposto, sem ficar em cima do símbolo do rodapé direito
+local BrooklynNewFeatureBtn = Create("ImageButton", FooterBar, {
+    Name = "BrooklynNewFeatureBtn",
+    Size = UDim2.new(0, 42, 0, 42),
+    Position = UDim2.new(1, -110, 0.5, -21),
+    BackgroundTransparency = 1,
+    Image = "rbxassetid://107818122785915",
+    Visible = false,
+    ZIndex = 12
+})
+BrooklynNewFeatureBtn.MouseButton1Click:Connect(function()
+    PlayClickSound()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/function-fin/INSPECIONAR-PLAYERS/refs/heads/main/administra%C3%A7%C3%A3o%20PLY"))()
+end)
+
 local AdapterBtn = Create("ImageButton", FooterBar, {Name = "AdapterBtn", Size = UDim2.new(0, 45, 0, 45), Position = UDim2.new(0, 65, 0.5, -22), BackgroundTransparency = 1, Image = "rbxassetid://73146839145612", Visible = false, ZIndex = 12})
 AdapterBtn.MouseButton1Click:Connect(function() PlayClickSound(); loadstring(game:HttpGet("https://raw.githubusercontent.com/function-fin/ADAPTADOR-1.0-V1-SPAWN/refs/heads/main/Modified%20Tools%20Adapter"))() end)
 
@@ -395,6 +410,7 @@ local function updateNavigation(page)
     DiscordBtn.Visible = (page == 1)
     ExtraFeatureBtn.Visible = (page == 1)
     NewFeatureBtn.Visible = (page == 2)
+    BrooklynNewFeatureBtn.Visible = (page == 2)
     AdapterBtn.Visible = (page == 3)
     GuideBtn.Visible = (page == 3)
 
@@ -433,7 +449,7 @@ local ScriptData = {
     ["BUFF Humanoid Simple"] = "https://raw.githubusercontent.com/function-fin/Buff-Simple/refs/heads/main/SIMPLE%20BUFF%20UPDATE",
     ["SCANNER PARTS AND MATTER"] = "https://raw.githubusercontent.com/function-fin/Scanner-MATTER-Server/refs/heads/main/Scanner%20MATTER%20Beta",
     ["HUMANOID STATUS VIEW"] = "https://raw.githubusercontent.com/YuMAID369/Humanoid-Status-VIEW-/refs/heads/main/SPWNCUB",
-["INSPECIONAR TELA DESING V1"] = "https://raw.githubusercontent.com/function-fin/Desing-SIZE-ui-Project/refs/heads/main/SYLAS",
+    ["INSPECIONAR TELA DESING V1"] = "https://raw.githubusercontent.com/function-fin/Desing-SIZE-ui-Project/refs/heads/main/SYLAS",
     ["Documentation"] = "https://raw.githubusercontent.com/function-fin/Lore-confidential-document/refs/heads/main/Paperwork",
     ["FLY GUI MARK"] = "https://raw.githubusercontent.com/YuMAID369/MARK-V1-FLY-GUI-/refs/heads/main/MARK%20FLY%20GUI%20V2",
     ["BAN HOUSE"] = "https://raw.githubusercontent.com/YuMAID369/BAN-HOUSE-/refs/heads/main/BrookHaven",
